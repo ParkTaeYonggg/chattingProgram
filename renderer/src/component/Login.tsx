@@ -30,7 +30,7 @@ const Login = (): JSX.Element => {
         <CustomInput type={"password"} value={pw} onChange={setPw} placeholder={"패스워드를 입력해주세요."} />
         <CustomButton onClick={handleLogin}>로그인</CustomButton>
         <StyledLoginSignUpBox>
-          <Link href={"/signUp"}>
+          <Link href={"/signup"}>
             <StyledLoginSignUpLink>회원가입</StyledLoginSignUpLink>
           </Link>
         </StyledLoginSignUpBox>

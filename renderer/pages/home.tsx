@@ -1,13 +1,11 @@
 import React from "react";
-import Head from "next/head";
 import Login from "../src/component/Login";
+import CustomHead from "../src/common/CustomHead";
 
 function Home() {
   return (
     <React.Fragment>
-      <Head>
-        <title>환영합니다.</title>
-      </Head>
+      <CustomHead title={"only채팅 - 로그인"} />
       <Login />
     </React.Fragment>
   );

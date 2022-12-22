@@ -11,3 +11,8 @@ export interface customButtonInfo {
   size?: "small" | "medium" | "large";
   onClick: Function;
 }
+
+export interface userInfo {
+  id: string;
+  token: string;
+}

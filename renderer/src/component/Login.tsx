@@ -6,6 +6,8 @@ import { StyledLoginContainer, StyledLoginSignUpBox, StyledLoginSignUpLink, Styl
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { ErrorAlert } from "../utils/alerts";
+import { userInfo } from "../interface/commonInfo";
+import { setCookie } from "cookies-next";
 
 const Login = (): JSX.Element => {
   const [id, setId] = useInput("");
@@ -14,9 +16,10 @@ const Login = (): JSX.Element => {
   const handleLogin = (id: string, pw: string) => {
     signInWithEmailAndPassword(auth, id, pw)
       .then((userCredential) => {
-        console.log("로그인 성공");
         const user = userCredential.user;
-        console.log(user);
+        const userData: userInfo = { id: user.email, token: user.refreshToken };
+        // setCookie("userToken", JSON.stringify(userData));
+        console.log(userData);
       })
       .catch((error) => {
         ErrorAlert("로그인 실패", "계정이 없거나 아이디 혹은 비밀번호를 확인해주세요!");

@@ -9,7 +9,8 @@ import { msgInfo } from "../interface/signUpInfo";
 import { StyledSignUpBox, StyledSignUpContainer, StyledSignUpErrorMSG, StyledSignUpLink, StyledSignUpTitle, StyledSignUpWrapper } from "../styles/StyledSignUp";
 import { checkId, checkPw } from "../utils/validateInput";
 import { setCookie } from "cookies-next";
-import { ErrorAlert } from "../utils/alerts";
+import { ErrorAlert, SuccessAlert } from "../utils/alerts";
+import { userInfo } from "../interface/commonInfo";
 const SignUp = (): JSX.Element => {
   const router = useRouter();
   const [id, setId] = useInput("");
@@ -31,8 +32,7 @@ const SignUp = (): JSX.Element => {
     if (!!msg.id || !!msg.pw) return;
     createUserWithEmailAndPassword(auth, id, pw)
       .then((userCredential) => {
-        const user = userCredential.user;
-        setCookie("userToken", user);
+        SuccessAlert("회원가입 완료", "환영합니다. 로그인 화면으로 돌아갑니다.");
         router.push("/home");
       })
       .catch((error) => {

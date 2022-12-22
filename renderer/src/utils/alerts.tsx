@@ -9,3 +9,12 @@ export const ErrorAlert = (title: string, text: string) => {
     confirmButtonColor: theme.backgroundColor.red,
   });
 };
+
+export const SuccessAlert = (title: string, text: string) => {
+  Swal.fire({
+    icon: "success",
+    title: title,
+    text: text,
+    confirmButtonColor: theme.backgroundColor.brown,
+  });
+};

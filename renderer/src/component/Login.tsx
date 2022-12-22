@@ -18,8 +18,7 @@ const Login = (): JSX.Element => {
       .then((userCredential) => {
         const user = userCredential.user;
         const userData: userInfo = { id: user.email, token: user.refreshToken };
-        // setCookie("userToken", JSON.stringify(userData));
-        console.log(userData);
+        setCookie("userData", JSON.stringify(userData), { maxAge: 60 * 6 * 24 });
       })
       .catch((error) => {
         ErrorAlert("로그인 실패", "계정이 없거나 아이디 혹은 비밀번호를 확인해주세요!");

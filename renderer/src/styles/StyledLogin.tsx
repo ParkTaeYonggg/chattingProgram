@@ -31,6 +31,7 @@ export const StyledLoginTitle = styled.div`
   font-size: 3rem;
   text-align: center;
   line-height: 4;
+  color: ${theme.fontColor.pink};
 `;
 
 export const StyledLoginSignUpBox = styled.nav`

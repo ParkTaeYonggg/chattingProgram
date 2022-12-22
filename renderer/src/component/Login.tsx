@@ -3,26 +3,33 @@ import CustomButton from "../common/CustomButton";
 import CustomInput from "../common/CustomInput";
 import useInput from "../hooks/useInput";
 import { StyledLoginContainer, StyledLoginSignUpBox, StyledLoginSignUpLink, StyledLoginTitle, StyledLoginWrapper } from "../styles/StyledLogin";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { ErrorAlert } from "../utils/alerts";
-import { userInfo } from "../interface/commonInfo";
 import { setCookie } from "cookies-next";
+import { useRouter } from "next/router";
+import { useAuthSignInWithEmailAndPassword } from "@react-query-firebase/auth";
 
 const Login = (): JSX.Element => {
   const [id, setId] = useInput("");
   const [pw, setPw] = useInput("");
+  const router = useRouter();
+  const mutation = useAuthSignInWithEmailAndPassword(auth);
 
   const handleLogin = (id: string, pw: string) => {
-    signInWithEmailAndPassword(auth, id, pw)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        const userData: userInfo = { id: user.email, token: user.refreshToken };
-        setCookie("userData", JSON.stringify(userData), { maxAge: 60 * 6 * 24 });
-      })
-      .catch((error) => {
-        ErrorAlert("로그인 실패", "계정이 없거나 아이디 혹은 비밀번호를 확인해주세요!");
-      });
+    mutation.mutate(
+      { email: id, password: pw },
+      {
+        onSuccess: (e) => {
+          const user = e.user;
+
+          setCookie("userData", JSON.stringify({ id: user.email, uid: user.uid, token: user.refreshToken }), { maxAge: 60 * 6 * 24 });
+          router.push("/chat");
+        },
+        onError: () => {
+          ErrorAlert("로그인 실패", "아이디 혹은 비밀번호를 다시 확인해주세요.");
+        },
+      }
+    );
   };
 
   return (

@@ -32,7 +32,6 @@ const SignUp = (): JSX.Element => {
     if (!!msg.id || !!msg.pw) return;
     createUserWithEmailAndPassword(auth, id, pw)
       .then((userCredential) => {
-        SuccessAlert("회원가입 완료", "환영합니다. 로그인 화면으로 돌아갑니다.");
         router.push("/home");
       })
       .catch((error) => {

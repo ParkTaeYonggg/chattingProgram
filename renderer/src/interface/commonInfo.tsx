@@ -13,6 +13,6 @@ export interface customButtonInfo {
 }
 
 export interface userInfo {
-  id: string;
-  token: string;
+  id?: string;
+  token?: string;
 }

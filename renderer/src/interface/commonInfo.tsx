@@ -2,6 +2,7 @@ export interface customInputInfo {
   type: "text" | "password" | "email";
   value: string | number;
   onChange: Function;
+  onBlur?: Function;
   placeholder?: string;
 }
 

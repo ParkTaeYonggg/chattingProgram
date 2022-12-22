@@ -47,4 +47,9 @@ export const StyledSignUpLink = styled.a`
   font-size: 1.5rem;
 `;
 
-export const StyledSignUpErrorMSG = styled.p``;
+export const StyledSignUpErrorMSG = styled.p`
+  padding: 5px;
+  max-height: 50px;
+  box-sizing: border-box;
+  color: ${theme.fontColor.red};
+`;

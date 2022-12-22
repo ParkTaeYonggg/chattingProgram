@@ -16,6 +16,7 @@ const Login = (): JSX.Element => {
       .then((userCredential) => {
         console.log("로그인 성공");
         const user = userCredential.user;
+        console.log(user);
       })
       .catch((error) => {
         ErrorAlert("로그인 실패", "계정이 없거나 아이디 혹은 비밀번호를 확인해주세요!");
@@ -28,7 +29,7 @@ const Login = (): JSX.Element => {
         <StyledLoginTitle>Only 채팅</StyledLoginTitle>
         <CustomInput type={"email"} value={id} onChange={setId} placeholder={"아이디를 입력해주세요."} />
         <CustomInput type={"password"} value={pw} onChange={setPw} placeholder={"패스워드를 입력해주세요."} />
-        <CustomButton onClick={handleLogin}>로그인</CustomButton>
+        <CustomButton onClick={() => handleLogin(id, pw)}>로그인</CustomButton>
         <StyledLoginSignUpBox>
           <Link href={"/signup"}>
             <StyledLoginSignUpLink>회원가입</StyledLoginSignUpLink>

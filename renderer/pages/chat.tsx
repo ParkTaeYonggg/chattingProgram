@@ -9,6 +9,7 @@ const ChatHome = ({ userData }): JSX.Element => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const userData: userInfo = JSON.parse(context.req.cookies["userData"]);
+
   console.log("유저 데이터 : ", userData);
   return {
     props: {
